@@ -1,0 +1,31 @@
+[package]
+authors = ["Hamza Gorcevic, Ilhan Basic, Dzemil Manic, Almina Becirovic]
+categories = ["web-programming"]
+description = "Created with Anchor"
+edition = "2021"
+homepage = ""
+include = ["src/**/*", "../../LICENSE", "../../README.md", "../../CHANGELOG.md"]
+keywords = ["solana", "solana-dapp", "solana-smart-contract", "anchor"]
+license = "MIT"
+name = "solana-polls"
+readme = "../../README.md"
+repository = ""
+version = "0.1.0"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "solana_polls"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+idl-build = ["anchor-lang/idl-build"]
+default = []
+
+[dependencies]
+anchor-lang = "0.31.1"
+
+[dev-dependencies]
+pretty_assertions = "^1.3"

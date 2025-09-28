@@ -1,0 +1,328 @@
+{
+  "address": "6zUaV2erH3gaCo2zEXKRwvXuNgGNKHs22nPsrm9NKaUP",
+  "metadata": {
+    "name": "solana_polls",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor",
+    "repository": ""
+  },
+  "instructions": [
+    {
+      "name": "close_poll",
+      "docs": [
+        "Close poll"
+      ],
+      "discriminator": [
+        139,
+        213,
+        162,
+        65,
+        172,
+        150,
+        123,
+        67
+      ],
+      "accounts": [
+        {
+          "name": "data",
+          "writable": true
+        },
+        {
+          "name": "author",
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "poll_id",
+          "type": "u32"
+        }
+      ]
+    },
+    {
+      "name": "create_poll",
+      "docs": [
+        "Create a new poll in the application"
+      ],
+      "discriminator": [
+        182,
+        171,
+        112,
+        238,
+        6,
+        219,
+        14,
+        110
+      ],
+      "accounts": [
+        {
+          "name": "data",
+          "writable": true
+        },
+        {
+          "name": "author",
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "options",
+          "type": {
+            "vec": "string"
+          }
+        }
+      ]
+    },
+    {
+      "name": "initialize",
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "data",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "vote",
+      "docs": [
+        "Vote poll"
+      ],
+      "discriminator": [
+        227,
+        110,
+        155,
+        23,
+        136,
+        126,
+        172,
+        25
+      ],
+      "accounts": [
+        {
+          "name": "data",
+          "writable": true
+        },
+        {
+          "name": "voter",
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "poll_id",
+          "type": "u32"
+        },
+        {
+          "name": "option",
+          "type": "u32"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Data",
+      "discriminator": [
+        206,
+        156,
+        59,
+        188,
+        18,
+        79,
+        240,
+        232
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "AlreadyVoted"
+    },
+    {
+      "code": 6001,
+      "name": "NoSuchOption"
+    },
+    {
+      "code": 6002,
+      "name": "NoSuchPoll"
+    },
+    {
+      "code": 6003,
+      "name": "OperationNotAllowed"
+    },
+    {
+      "code": 6004,
+      "name": "PollAlreadyClosed"
+    },
+    {
+      "code": 6005,
+      "name": "PollClosed"
+    }
+  ],
+  "types": [
+    {
+      "name": "Data",
+      "docs": [
+        "The polls databaase"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "polls",
+            "docs": [
+              "Existing polls"
+            ],
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "Poll"
+                }
+              }
+            }
+          },
+          {
+            "name": "votes",
+            "docs": [
+              "Poll votes"
+            ],
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "Vote"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Poll",
+      "docs": [
+        "The poll defines a poll created by the user with its options and title"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "docs": [
+              "Poll id"
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "owner",
+            "docs": [
+              "Poll owner"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "title",
+            "docs": [
+              "Poll title"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "options",
+            "docs": [
+              "Poll options (id, text)"
+            ],
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "PollOption"
+                }
+              }
+            }
+          },
+          {
+            "name": "closed",
+            "docs": [
+              "Is the poll closed"
+            ],
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PollOption",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "u32"
+          },
+          {
+            "name": "text",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Vote",
+      "docs": [
+        "Represents a vote to a poll"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "poll_id",
+            "docs": [
+              "Poll id"
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "owner",
+            "docs": [
+              "The address which issued the vote"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "option",
+            "docs": [
+              "Option voted"
+            ],
+            "type": "u32"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 [package]
-authors = ["Hamza Gorcevic, Ilhan Basic, Dzemil Manic, Almina Becirovic]
+authors = ["Hamza Gorcevic", "Ilhan Basic", "Dzemil Manic", "Almina Becirovic"]
 categories = ["web-programming"]
 description = "Created with Anchor"
 edition = "2021"

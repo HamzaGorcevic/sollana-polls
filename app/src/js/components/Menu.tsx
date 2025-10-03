@@ -214,76 +214,7 @@ const WalletSection = styled.div`
 const Menu = () => {
   const location = useLocation();
   
-  // JavaScript solution to remove dropdown elements
-  React.useEffect(() => {
-    const removeDropdowns = () => {
-      // Remove dropdown containers
-      const dropdowns = document.querySelectorAll('.wallet-adapter-dropdown');
-      dropdowns.forEach(dropdown => {
-        if (dropdown && dropdown.parentNode) {
-          dropdown.remove();
-        }
-      });
-      
-      // Remove dropdown lists
-      const dropdownLists = document.querySelectorAll('.wallet-adapter-dropdown-list');
-      dropdownLists.forEach(list => {
-        if (list && list.parentNode) {
-          list.remove();
-        }
-      });
-      
-      // Remove dropdown items
-      const dropdownItems = document.querySelectorAll('.wallet-adapter-dropdown-list-item');
-      dropdownItems.forEach(item => {
-        if (item && item.parentNode) {
-          item.remove();
-        }
-      });
-      
-      // Remove elements by aria-label
-      const ariaDropdowns = document.querySelectorAll('[aria-label="dropdown-list"]');
-      ariaDropdowns.forEach(element => {
-        if (element && element.parentNode) {
-          element.remove();
-        }
-      });
-      
-      // Remove elements by role
-      const menuElements = document.querySelectorAll('[role="menu"], [role="menuitem"]');
-      menuElements.forEach(element => {
-        if (element && element.parentNode && 
-            (element.classList.contains('wallet-adapter-dropdown-list') || 
-             element.classList.contains('wallet-adapter-dropdown-list-item'))) {
-          element.remove();
-        }
-      });
-    };
-    
-    // Remove immediately
-    removeDropdowns();
-    
-    // Set up observer to remove dropdowns when they're added
-    const observer = new MutationObserver(() => {
-      removeDropdowns();
-    });
-    
-    // Observe the entire document for dropdown additions
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-      attributes: false
-    });
-    
-    // Also use interval as backup
-    const interval = setInterval(removeDropdowns, 100);
-    
-    // Cleanup
-    return () => {
-      observer.disconnect();
-      clearInterval(interval);
-    };
-  }, []);
+  // Removed the code that was interfering with wallet adapter modals
   
   return (
     <Header>

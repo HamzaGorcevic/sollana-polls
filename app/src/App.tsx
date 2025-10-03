@@ -143,7 +143,9 @@ const AppContent = () => {
     console.log("=== Wallet State Change ===");
     console.log("Wallet connected:", !!wallet);
     console.log("Wallet publicKey:", wallet?.publicKey?.toString());
+    console.log("Wallet object:", wallet);
     console.log("Connection:", !!connection);
+    console.log("Connection endpoint:", connection?.rpcEndpoint);
     console.log("Global data account:", globalDataAccount?.toString());
     console.log("Is initializing:", isInitializing);
     console.log("Error:", error);
